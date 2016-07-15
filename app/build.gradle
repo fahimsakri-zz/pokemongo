@@ -1,19 +1,36 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    signingConfigs {
+        config {
+            keyAlias 'FyndKeystore'
+            keyPassword 'fyndretail2015!'
+            storeFile file(System.getenv("KEYSTORE") as String ?: '/Users/shopsense/Documents/Fahim/Projects/Android/Fynd/Keystore/Production/fynd.jks')
+            storePassword 'fyndretail2015!'
+        }
+    }
     compileSdkVersion 24
     buildToolsVersion "24.0.0"
     defaultConfig {
         applicationId "pokemon.go.co.guideforpokemongogame"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+        versionCode System.getenv("VERSION_CODE") as Integer ?: 1
+        versionName System.getenv("VERSION_NAME") as String ?: "1.0.0"
+        resConfig "en"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    lintOptions {
+        abortOnError false
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.config
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -25,6 +42,5 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:24.0.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
     testCompile 'junit:junit:4.12'
 }
