@@ -70,6 +70,7 @@ public class PokemonFragment extends Fragment {
         ((TextView) view.findViewById(R.id.txtSpDefValue)).setText(pokemon.getSp_def());
         ((TextView) view.findViewById(R.id.txtSpeedValue)).setText(pokemon.getSpeed());
         ((TextView) view.findViewById(R.id.txtDefenceValue)).setText(pokemon.getDefense());
+        ((TextView) view.findViewById(R.id.txtTotalValue)).setText(pokemon.getTotal());
 
     }
 

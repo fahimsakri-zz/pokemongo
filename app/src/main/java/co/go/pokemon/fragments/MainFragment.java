@@ -4,6 +4,9 @@ import android.content.res.AssetFileDescriptor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -35,6 +38,7 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
     private SearchView mSearcView;
     private List<Pokemon> pokemons;
     private PokemonListAdapter mAdaper;
+    private View offerBanner;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +55,20 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        offerBanner = (View) view.findViewById(R.id.offerBanner);
+        offerBanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                NotificationFragment pokemonFragment = new NotificationFragment();
+                String backStateName = pokemonFragment.getClass().getName();
+                FragmentTransaction fragmentTransaction =
+                        fragmentManager.beginTransaction();
+                fragmentTransaction.add(android.R.id.content, pokemonFragment, backStateName);
+                fragmentTransaction.addToBackStack(backStateName);
+                fragmentTransaction.commit();
+            }
+        });
         mSearcView = (SearchView) view.findViewById(R.id.txtSearch);
         mSearcView.setOnQueryTextListener(this);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.pokemonlist);

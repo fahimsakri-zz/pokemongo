@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "300509576355",
+    "firebase_url": "https://pokemongo-2b64f.firebaseio.com",
+    "project_id": "pokemongo-2b64f",
+    "storage_bucket": "pokemongo-2b64f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300509576355:android:95f2fa79d5d17e98",
+        "android_client_info": {
+          "package_name": "co.go.pokemon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300509576355-oeo2dogpoi5f7f463k1mq11h7s6d0pl0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.go.pokemon",
+            "certificate_hash": "30C3D2386CD717FCA9C08373342E42C5313A5362"
+          }
+        },
+        {
+          "client_id": "300509576355-78o1un0qdscae9clukhi9gm2misbr6bs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.go.pokemon",
+            "certificate_hash": "09FB13D7C7167004EEBE1D2D33E51FC6AC4EEF40"
+          }
+        },
+        {
+          "client_id": "300509576355-ffr6b6icehth3b55lunm782p4n3cllm0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMMkW7hp6vuPaQVfjmILWCd5PNWrSdI2U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300509576355-ffr6b6icehth3b55lunm782p4n3cllm0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
