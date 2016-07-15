@@ -75,7 +75,6 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public String loadJSONFromAsset() {

@@ -1,6 +1,7 @@
 package co.go.pokemon.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.go.pokemon.MainActivity;
 import co.go.pokemon.R;
 import co.go.pokemon.fragments.PokemonFragment;
 import co.go.pokemon.model.Pokemon;
@@ -123,9 +125,17 @@ public class PokemonListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         }
 
+        private void pokemonViewed(Context context,Pokemon pokemon){
+            Bundle bundle = new Bundle();
+            bundle.putString("name",pokemon.getTitle());
+            bundle.putString("source","Feed");
+            ((MainActivity)context).getAnalytics().logEvent("Viewed Pokemon",bundle);
+        }
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.item_container) {
+                Pokemon pokemon =pokemonList.get(getAdapterPosition());
+                pokemonViewed(context,pokemon);
                 PokemonFragment pokemonFragment = PokemonFragment.newInstance(pokemonList.get(getAdapterPosition()));
                 FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
                 String backStateName = pokemonFragment.getClass().getName();

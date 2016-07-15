@@ -54,9 +54,13 @@ public class PokemonFragment extends Fragment {
                 .into((AppCompatImageView) view.findViewById(R.id.image));
 
 
-        ((TextView) view.findViewById(R.id.type1)).setText(pokemon.getType().get(0).split(",")[0]);
-        if (pokemon.getType().get(0).contains(","))
+        if (pokemon.getType().get(0).contains(",")) {
+            ((TextView) view.findViewById(R.id.type1)).setText(pokemon.getType().get(0).split(",")[0]);
             ((TextView) view.findViewById(R.id.type2)).setText(pokemon.getType().get(0).split(",")[1]);
+        } else {
+            ((TextView) view.findViewById(R.id.type2)).setVisibility(View.GONE);
+            ((TextView) view.findViewById(R.id.type1)).setText(pokemon.getType().get(0));
+        }
 
         ((TextView) view.findViewById(R.id.txtHpValue)).setText(pokemon.getHp());
         ((TextView) view.findViewById(R.id.txtAttackValue)).setText(pokemon.getAttack());

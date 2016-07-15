@@ -37,13 +37,15 @@
             android:id="@+id/relType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rank">
+            android:layout_below="@+id/rank"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/type1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
+                android:background="#EFD264"
+                android:padding="5dp"
                 android:text="sdf" />
 
             <TextView
@@ -52,6 +54,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/type1"
+                android:background="#4D73A9"
+                android:padding="5dp"
                 android:text="sdf" />
         </RelativeLayout>
 
