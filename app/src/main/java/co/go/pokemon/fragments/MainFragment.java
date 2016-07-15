@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +15,11 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import co.go.pokemon.R;
@@ -29,8 +30,11 @@ import co.go.pokemon.model.Pokemon;
  * Created by fahim on 7/15/16.
  */
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements SearchView.OnQueryTextListener {
     private RecyclerView mRecyclerView;
+    private SearchView mSearcView;
+    private List<Pokemon> pokemons;
+    private PokemonListAdapter mAdaper;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,8 +51,10 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = (RecyclerView)view.findViewById(R.id.pokemonlist);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        mSearcView = (SearchView) view.findViewById(R.id.txtSearch);
+        mSearcView.setOnQueryTextListener(this);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.pokemonlist);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         AssetFileDescriptor descriptor = null;
         try {
             descriptor = getContext().getAssets().openFd("pokemon.json");
@@ -62,8 +68,9 @@ public class MainFragment extends Fragment {
 
         try {
             String content = loadJSONFromAsset();
-            List<Pokemon> pokemons = gson.fromJson(content, POK_TYPE);
-            mRecyclerView.setAdapter(new PokemonListAdapter(getContext(),pokemons));
+            pokemons = gson.fromJson(content, POK_TYPE);
+            mAdaper = new PokemonListAdapter(getContext(), pokemons);
+            mRecyclerView.setAdapter(mAdaper);
             Log.d("lis", pokemons.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -96,4 +103,30 @@ public class MainFragment extends Fragment {
 
     }
 
+    private List<Pokemon> filter(List<Pokemon> models, String query) {
+        query = query.toLowerCase();
+
+        final List<Pokemon> filteredModelList = new ArrayList<>();
+        for (Pokemon model : models) {
+            final String text = model.getTitle().toLowerCase();
+            if (text.contains(query)) {
+                filteredModelList.add(model);
+            }
+        }
+        return filteredModelList;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        final List<Pokemon> filteredModelList = filter(pokemons, newText);
+        mAdaper.animateTo(filteredModelList);
+        mRecyclerView.scrollToPosition(0);
+        return true;
+    }
 }

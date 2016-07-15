@@ -1,10 +1,13 @@
 package co.go.pokemon.model;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * Created by fahim on 7/15/16.
  */
 
-public class Pokemon {
+public class Pokemon implements Serializable {
     private String img_src;
 
     private String total;
@@ -23,7 +26,7 @@ public class Pokemon {
 
     private String attack;
 
-    private String type;
+    private List<String> type;
 
     private String sp_def;
 
@@ -99,11 +102,11 @@ public class Pokemon {
         this.attack = attack;
     }
 
-    public String getType() {
+    public List<String> getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(List<String> type) {
         this.type = type;
     }
 
