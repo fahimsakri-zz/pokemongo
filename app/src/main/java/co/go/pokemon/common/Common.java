@@ -2,6 +2,7 @@ package co.go.pokemon.common;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -15,6 +16,9 @@ import retrofit2.http.GET;
  */
 
 public class Common {
+
+    public static final String APPSFLYER_DEV_KEY = "zD9EQSqJtNMADxmqC3AiNQ";
+
 
     public interface OfferService {
         @GET("api/v2/web/inventory/get-sale/")
@@ -30,6 +34,7 @@ public class Common {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
+
     public static int DIME_TYPE_WIDTH = 1;
     public static int DIME_TYPE_HEIGHT = 2;
     public static int deviceWidth = 0;
@@ -60,4 +65,10 @@ public class Common {
             return deviceHeight;
         return getDeviceSize(DIME_TYPE_HEIGHT, context);
     }
+
+    public static String getDeviceAndriod_Id(Context context) {
+        return Settings.Secure.getString(context.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+    }
+
 }
