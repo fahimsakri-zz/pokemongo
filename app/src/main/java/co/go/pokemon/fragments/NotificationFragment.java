@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +39,7 @@ public class NotificationFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerview = (RecyclerView) view.findViewById(R.id.mRecyclerView);
-        mRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        mRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://orbis.gofynd.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -52,8 +51,9 @@ public class NotificationFragment extends Fragment {
         repos.enqueue(new Callback<Offers>() {
             @Override
             public void onResponse(Call<Offers> call, Response<Offers> response) {
-                Offers offers = (Offers) response.body();
-                OfferListAdapter offerListAdapter = new OfferListAdapter(getContext(),offers);
+                Offers offers = response.body();
+                offers.getDeals().add(0, null);
+                OfferListAdapter offerListAdapter = new OfferListAdapter(getContext(), offers);
                 mRecyclerview.setAdapter(offerListAdapter);
               /*  if(response.body()!=null){
 
