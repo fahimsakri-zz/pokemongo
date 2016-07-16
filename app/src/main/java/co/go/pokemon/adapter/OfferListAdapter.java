@@ -16,7 +16,6 @@ import co.go.pokemon.R;
 import co.go.pokemon.common.Common;
 import co.go.pokemon.model.Deals;
 import co.go.pokemon.model.Offers;
-import co.go.pokemon.model.Pokemon;
 
 /**
  * Created by fahim on 7/15/16.
@@ -55,13 +54,21 @@ public class OfferListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ItemHolder) {
-            int extraSpaces = 0;// 8 + 8;
-            int cardWidth = Common.getDeviceWidth(context) - Common.dpToPx(context, extraSpaces);
+
+            int cardWidth = (Common.getDeviceWidth(context));
+            RecyclerView.LayoutParams lp = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
+            lp.width = (int) (cardWidth -
+                    2 * context.getResources().getDimension(R.dimen.item_decoration_brand_tab_all));
+            int itemWidth = (int) (cardWidth - 2 *
+                    (context.getResources().getDimension(R.dimen.item_decoration_brand_tab_all) +
+                            context.getResources().getDimension(R.dimen.feed_card_padding)));
 
             if (position == 0) {
-                ((ItemHolder) holder).itemContainer.getLayoutParams().height = (int) (cardWidth * 0.5);
-                FrameLayout.LayoutParams frameLayoutParams = new FrameLayout.LayoutParams(cardWidth, FrameLayout.LayoutParams.MATCH_PARENT);
-                ((ItemHolder) holder).offer_image.setLayoutParams(frameLayoutParams);
+                ((ItemHolder) holder).offer_image.getLayoutParams().width = itemWidth;
+                ((ItemHolder) holder).offer_image.getLayoutParams().height = (int) (itemWidth * 0.5);
+                //   ((ItemHolder) holder).itemContainer.getLayoutParams().height = (int) (cardWidth * 0.5);
+                // FrameLayout.LayoutParams frameLayoutParams = new FrameLayout.LayoutParams(cardWidth, FrameLayout.LayoutParams.MATCH_PARENT);
+                //((ItemHolder) holder).offer_image.setLayoutParams(frameLayoutParams);
                 (((ItemHolder) holder).offer_image).setAdjustViewBounds(true);
                 Glide.with(context)
                         .load(Common.REFER_BANNER)
@@ -74,9 +81,10 @@ public class OfferListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 String[] ratioValues;
                 ratioValues = currentFeedItemData.getBanner_image().getAspect_ratio().split(":");
                 float imageRatio = Float.parseFloat(ratioValues[1]) / Float.parseFloat(ratioValues[0]);
-                ((ItemHolder) holder).itemContainer.getLayoutParams().height = (int) (cardWidth * imageRatio);
-                FrameLayout.LayoutParams frameLayoutParams = new FrameLayout.LayoutParams((int) cardWidth, FrameLayout.LayoutParams.MATCH_PARENT);
-                ((ItemHolder) holder).offer_image.setLayoutParams(frameLayoutParams);
+                // ((ItemHolder) holder).itemContainer.getLayoutParams().height = (int) (cardWidth * imageRatio);
+                // FrameLayout.LayoutParams frameLayoutParams = new FrameLayout.LayoutParams((int) cardWidth, FrameLayout.LayoutParams.MATCH_PARENT);
+                ((ItemHolder) holder).offer_image.getLayoutParams().width = itemWidth;
+                ((ItemHolder) holder).offer_image.getLayoutParams().height = (int) (itemWidth * imageRatio);
                 (((ItemHolder) holder).offer_image).setAdjustViewBounds(true);
                 Glide.with(context)
                         .load(currentFeedItemData.getBanner_image().getUrl())
@@ -116,8 +124,7 @@ public class OfferListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         private void offerListViewed(Context context) {
             Bundle bundle = new Bundle();
-            bundle.putString("type", "banner");
-            ((MainActivity) context).getAnalytics().logEvent("viewed_offer", bundle);
+            ((MainActivity) context).getAnalytics().logEvent("clicked_offer", bundle);
         }
 
         @Override
