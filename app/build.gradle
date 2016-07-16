@@ -31,7 +31,7 @@ android {
     buildToolsVersion "24.0.0"
     defaultConfig {
         applicationId "co.go.pokemon"
-        minSdkVersion 16
+        minSdkVersion 10
         targetSdkVersion 24
         versionCode System.getenv("VERSION_CODE") as Integer ?: 1
         versionName System.getenv("VERSION_NAME") as String ?: "1.0.0"
@@ -49,7 +49,7 @@ android {
     buildTypes {
         release {
           // minifyEnabled true
-            shrinkResources true
+           // shrinkResources true
             signingConfig signingConfigs.config
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
