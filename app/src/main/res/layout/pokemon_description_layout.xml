@@ -6,47 +6,69 @@
     android:background="@android:color/white"
     android:clickable="true">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center">
+        android:orientation="vertical"
+        android:paddingBottom="15dp"
+        android:paddingTop="2dp">
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="20dp"
-            android:minHeight="150dp" />
+            android:layout_gravity="center"
+            android:maxHeight="250dp"
+            android:maxWidth="250dp"
+            android:minHeight="150dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp" />
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/image"
-            android:layout_centerHorizontal="true" />
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:textColor="#486FA6"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/rank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/name"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/appTextColor" />
 
         <RelativeLayout
             android:id="@+id/relType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rank"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="8dp"
             android:gravity="center">
 
             <TextView
                 android:id="@+id/type1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#EFD264"
-                android:padding="5dp"
-                android:text="sdf" />
+                android:background="@drawable/rounded_yellow_border"
+                android:paddingBottom="5dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="5dp"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/type2"
@@ -54,29 +76,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/type1"
-                android:background="#4D73A9"
-                android:padding="5dp"
-                android:text="sdf" />
+                android:background="@drawable/rounded_blue_border"
+                android:paddingBottom="5dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="5dp"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
         </RelativeLayout>
+
 
         <RelativeLayout
             android:id="@+id/relHP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/relType"
+            android:background="@color/smokeWhite"
             android:padding="10dp">
 
             <TextView
                 android:id="@+id/txtHp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/property_heading"
                 android:layout_alignParentLeft="true"
                 android:text="HP" />
 
             <TextView
                 android:id="@+id/txtHpValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/property_value"
                 android:layout_alignParentRight="true" />
         </RelativeLayout>
 
@@ -85,19 +110,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/relHP"
+            android:background="@color/white"
             android:padding="10dp">
 
             <TextView
                 android:id="@+id/txtAttack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/property_heading"
                 android:layout_alignParentLeft="true"
                 android:text="Attack" />
 
             <TextView
                 android:id="@+id/txtAttackValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/property_value"
                 android:layout_alignParentRight="true" />
         </RelativeLayout>
 
@@ -106,19 +130,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/relAttack"
+            android:background="@color/smokeWhite"
             android:padding="10dp">
 
             <TextView
                 android:id="@+id/txtDefence"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/property_heading"
                 android:layout_alignParentLeft="true"
                 android:text="Defense" />
 
             <TextView
                 android:id="@+id/txtDefenceValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/property_value"
                 android:layout_alignParentRight="true" />
         </RelativeLayout>
 
@@ -127,19 +150,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/relDefence"
+            android:background="@color/white"
             android:padding="10dp">
 
             <TextView
                 android:id="@+id/txtSpAtk"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/property_heading"
                 android:layout_alignParentLeft="true"
                 android:text="Sp. Atk" />
 
             <TextView
                 android:id="@+id/txtSpAtkValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/property_value"
                 android:layout_alignParentRight="true" />
         </RelativeLayout>
 
@@ -148,19 +170,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/relSpAtk"
+            android:background="@color/smokeWhite"
             android:padding="10dp">
 
             <TextView
                 android:id="@+id/txtSpDef"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/property_heading"
                 android:layout_alignParentLeft="true"
                 android:text="Sp. Def" />
 
             <TextView
                 android:id="@+id/txtSpDefValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/property_value"
                 android:layout_alignParentRight="true" />
         </RelativeLayout>
 
@@ -169,19 +190,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/relSpDef"
+            android:background="@color/white"
             android:padding="10dp">
 
             <TextView
                 android:id="@+id/txtSpeed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/property_heading"
                 android:layout_alignParentLeft="true"
                 android:text="Speed" />
 
             <TextView
                 android:id="@+id/txtSpeedValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/property_value"
                 android:layout_alignParentRight="true" />
         </RelativeLayout>
 
@@ -190,20 +210,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/relSpeed"
+            android:background="#FFE1DDDD"
             android:padding="10dp">
 
             <TextView
                 android:id="@+id/txtTotal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/property_heading"
                 android:layout_alignParentLeft="true"
-                android:text="Total" />
+                android:textSize="17sp"
+                android:text="Total"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtTotalValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true" />
+                style="@style/property_value"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/appTextColor"
+                android:textSize="15sp"
+                android:textStyle="bold" />
         </RelativeLayout>
-    </RelativeLayout>
+
+    </LinearLayout>
 </ScrollView>

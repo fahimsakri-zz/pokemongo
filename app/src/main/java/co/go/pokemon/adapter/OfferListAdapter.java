@@ -54,6 +54,7 @@ public class OfferListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ItemHolder) {
+
             int cardWidth = (Common.getDeviceWidth(context));
             RecyclerView.LayoutParams lp = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
             lp.width = (int) (cardWidth -
@@ -61,6 +62,7 @@ public class OfferListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             int itemWidth = (int) (cardWidth - 2 *
                     (context.getResources().getDimension(R.dimen.item_decoration_brand_tab_all) +
                             context.getResources().getDimension(R.dimen.feed_card_padding)));
+
             if (position == 0) {
                 ((ItemHolder) holder).offer_image.getLayoutParams().width = itemWidth;
                 ((ItemHolder) holder).offer_image.getLayoutParams().height = (int) (itemWidth * 0.5);
@@ -71,6 +73,7 @@ public class OfferListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 Glide.with(context)
                         .load(Common.REFER_BANNER)
                         .centerCrop()
+                        .placeholder(R.color.smokeWhite)
                         .into(((ItemHolder) holder).offer_image);
             } else {
 
@@ -86,8 +89,10 @@ public class OfferListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 Glide.with(context)
                         .load(currentFeedItemData.getBanner_image().getUrl())
                         .centerCrop()
+                        .placeholder(R.color.smokeWhite)
                         .into(((ItemHolder) holder).offer_image);
             }
+
 
             //((OfferHolder) holder).offerImage.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.FIT_XY);
             // ((ItemHolder) holder).name.setText(pokemonList.get(position).getTitle());

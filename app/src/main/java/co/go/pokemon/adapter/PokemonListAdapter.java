@@ -53,14 +53,16 @@ public class PokemonListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 Glide.with(context)
                         .load(pokemonList.get(position).getIcon_url())
                         .fitCenter()
-                        .crossFade().placeholder(R.color.white)
+                        //.crossFade()
+                        .placeholder(R.color.white)
                         .into(((ItemHolder) holder).icon);
             } else {
                 ((ItemHolder) holder).itemContainer.setBackgroundColor(context.getResources().getColor(R.color.white));
                 Glide.with(context)
                         .load(pokemonList.get(position).getIcon_url())
                         .fitCenter()
-                        .crossFade().placeholder(R.color.smokeWhite)
+                        //.crossFade()
+                        .placeholder(R.color.smokeWhite)
                         .into(((ItemHolder) holder).icon);
             }
             ((ItemHolder) holder).name.setText(pokemonList.get(position).getTitle());
@@ -166,7 +168,7 @@ public class PokemonListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 String backStateName = pokemonFragment.getClass().getName();
                 FragmentTransaction fragmentTransaction =
                         fragmentManager.beginTransaction();
-                fragmentTransaction.add(android.R.id.content, pokemonFragment, backStateName);
+                fragmentTransaction.add(R.id.activity_main, pokemonFragment, backStateName);
                 fragmentTransaction.addToBackStack(backStateName);
                 fragmentTransaction.commit();
             }

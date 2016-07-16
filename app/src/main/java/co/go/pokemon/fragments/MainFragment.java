@@ -14,7 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -40,7 +40,7 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
     private SearchView mSearcView;
     private List<Pokemon> pokemons;
     private PokemonListAdapter mAdaper;
-    private LinearLayout offerBanner;
+    private RelativeLayout offerBanner;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        offerBanner = (LinearLayout) view.findViewById(R.id.offerBanner);
+        offerBanner = (RelativeLayout) view.findViewById(R.id.offerBanner);
         offerBanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,6 +96,8 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
         try {
             String content = loadJSONFromAsset();
             pokemons = gson.fromJson(content, POK_TYPE);
+            // Adding Dummy Item for Refer n Earn Card
+          //  pokemons.add(0,null);
             mAdaper = new PokemonListAdapter(getContext(), pokemons);
             mRecyclerView.setAdapter(mAdaper);
             Log.d("lis", pokemons.toString());

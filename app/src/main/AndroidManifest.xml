@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="co.go.pokemon">
 
-    <uses-permission android:name="android.permission.INTERNET">
-
-    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <application
         android:name=".PokemonApplication"
         android:allowBackup="true"
@@ -23,6 +23,22 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="0bfdb2b143c419f9f0ba6edd7ac4a34a6079537e" />
+
+        <!--     appsflyer receiver           -->
+                <receiver android:name="com.appsflyer.SingleInstallBroadcastReceiver" android:exported="true">
+
+            <intent-filter>
+
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+
+            </intent-filter>
+
+        </receiver>
+
+        <!--  used by appsflyer      -->
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
     </application>
 
 </manifest>
