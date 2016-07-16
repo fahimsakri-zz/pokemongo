@@ -1,5 +1,6 @@
 package co.go.pokemon.fragments;
 
+import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,6 +26,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.go.pokemon.MainActivity;
 import co.go.pokemon.R;
 import co.go.pokemon.adapter.PokemonListAdapter;
 import co.go.pokemon.model.Pokemon;
@@ -52,6 +54,13 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
         return view;
     }
 
+    private void offerListViewed(Context context) {
+        Bundle bundle = new Bundle();
+        bundle.putString("type", "list");
+        ((MainActivity) context).getAnalytics().logEvent("viewed_offer", bundle);
+    }
+
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -59,6 +68,7 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
         offerBanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                offerListViewed(getActivity());
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 NotificationFragment pokemonFragment = new NotificationFragment();
                 String backStateName = pokemonFragment.getClass().getName();

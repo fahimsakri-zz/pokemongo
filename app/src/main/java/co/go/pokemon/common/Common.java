@@ -1,8 +1,10 @@
 package co.go.pokemon.common;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.provider.Settings;
+import android.net.Uri;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -18,7 +20,10 @@ import retrofit2.http.GET;
 public class Common {
 
     public static final String APPSFLYER_DEV_KEY = "zD9EQSqJtNMADxmqC3AiNQ";
-
+    public static final String DEEPLINK_URL_BANNER ="http://go.fyndi.ng/iSyg/9HWwLNte3u";
+    public static final String DEEPLINK_URL_LIST ="http://go.fyndi.ng/iSyg/uj5uKbwe3u";
+    public static final String REFER_BANNER ="http://cdn3.gofynd.com/inapp_banners/fynd_credits_banner_small.jpg";
+    //Bottom Banner - http://go.fyndi.ng/iSyg/pLiBwWFe3u
 
     public interface OfferService {
         @GET("api/v2/web/inventory/get-sale/")
@@ -52,6 +57,11 @@ public class Common {
         } else {
             return deviceHeight;
         }
+    }
+
+    public static void openDeepLink(Context context, String url) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        context.startActivity(browserIntent);
     }
 
     public static int getDeviceWidth(Context context) {
