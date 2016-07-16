@@ -41,7 +41,7 @@ public class OfferListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ItemHolder) {
-            int extraSpaces = 8 + 8;
+            int extraSpaces =0;// 8 + 8;
             int cardWidth = Common.getDeviceWidth(context) - Common.dpToPx(context, extraSpaces);
             Deals currentFeedItemData = offers.getDeals()[position];
             String[] ratioValues;
