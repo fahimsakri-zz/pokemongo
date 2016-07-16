@@ -56,12 +56,14 @@ public class OfferListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (holder instanceof ItemHolder) {
 
             int cardWidth = (Common.getDeviceWidth(context));
-            RecyclerView.LayoutParams lp = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
+           /* RecyclerView.LayoutParams lp = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
             lp.width = (int) (cardWidth -
-                    2 * context.getResources().getDimension(R.dimen.item_decoration_brand_tab_all));
+                    2 * context.getResources().getDimension(R.dimen.item_decoration_brand_tab_all));*/
             int itemWidth = (int) (cardWidth - 2 *
-                    (context.getResources().getDimension(R.dimen.item_decoration_brand_tab_all) +
-                            context.getResources().getDimension(R.dimen.feed_card_padding)));
+                       (context.getResources().getDimension(R.dimen.margin) +
+                            context.getResources().getDimension(R.dimen.item_decoration_brand_tab_all) +
+                            context.getResources().getDimension(R.dimen.feed_card_padding)
+                    ));
 
             if (position == 0) {
                 ((ItemHolder) holder).offer_image.getLayoutParams().width = itemWidth;
@@ -129,10 +131,10 @@ public class OfferListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            if(Common.isNetworkAvailable(context)){
+            if (Common.isNetworkAvailable(context)) {
                 offerListViewed(context);
                 Common.openDeepLink(context, Common.DEEPLINK_URL_BANNER);
-            }else{
+            } else {
                 Common.noNetwork(context);
             }
 
