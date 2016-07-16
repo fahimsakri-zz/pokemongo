@@ -21,10 +21,10 @@ android {
 
     signingConfigs {
         config {
-            keyAlias 'FyndKeystore'
-            keyPassword 'fyndretail2015!'
-            storeFile file(System.getenv("KEYSTORE") as String ?: '/Users/shopsense/Documents/Fahim/Projects/Android/Fynd/Keystore/Production/fynd.jks')
-            storePassword 'fyndretail2015!'
+            keyAlias 'pokemonkeystore'
+            keyPassword 'pokemon2016!'
+            storeFile file('/Users/shopsense/Documents/Fahim/Projects/Android/PokemonKeystore/pokemonkeystore.jks')
+            storePassword 'pokemon2016!'
         }
     }
     compileSdkVersion 24

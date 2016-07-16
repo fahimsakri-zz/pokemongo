@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:background="#fff"
             android:iconifiedByDefault="false"
-            app:queryHint="Search for Pokemon" />
+            app:queryHint="Search Pokémon" />
     </RelativeLayout>
 
 
