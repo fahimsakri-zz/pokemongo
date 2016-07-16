@@ -21,6 +21,7 @@ import java.util.List;
 
 import co.go.pokemon.MainActivity;
 import co.go.pokemon.R;
+import co.go.pokemon.common.Common;
 import co.go.pokemon.fragments.PokemonFragment;
 import co.go.pokemon.model.Pokemon;
 
@@ -157,6 +158,7 @@ public class PokemonListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.item_container) {
+                Common.hideKeyboard(context);
                 Pokemon pokemon = pokemonList.get(getAdapterPosition());
                 pokemonViewed(context, pokemon);
                 PokemonFragment pokemonFragment = PokemonFragment.newInstance(pokemonList.get(getAdapterPosition()));
