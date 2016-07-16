@@ -51,6 +51,7 @@ public class PokemonFragment extends Fragment {
                 .fitCenter()
                 .override(300, 300)
                 .crossFade()
+                .placeholder(R.color.smokeWhite)
                 .into((AppCompatImageView) view.findViewById(R.id.image));
 
 

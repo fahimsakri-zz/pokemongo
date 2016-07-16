@@ -54,7 +54,8 @@ public class OfferListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             Glide.with(context)
                     .load(currentFeedItemData.getBanner_image().getUrl())
                     .centerCrop()
-                    .crossFade()
+                    //.crossFade()
+                    .placeholder(R.color.smokeWhite)
                     .into(((ItemHolder) holder).offer_image);
 
             //((OfferHolder) holder).offerImage.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.FIT_XY);
