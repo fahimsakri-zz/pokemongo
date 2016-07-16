@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="co.go.pokemon">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET">
+
+    </uses-permission>
     <application
         android:name=".PokemonApplication"
         android:allowBackup="true"
@@ -18,6 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="0bfdb2b143c419f9f0ba6edd7ac4a34a6079537e" />
     </application>
 
 </manifest>

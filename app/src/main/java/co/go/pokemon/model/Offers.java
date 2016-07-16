@@ -1,5 +1,7 @@
 package co.go.pokemon.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by fahim on 7/16/16.
  */
@@ -7,13 +9,13 @@ package co.go.pokemon.model;
 public class Offers {
 
 
-    private Deals[] deals;
+    private ArrayList<Deals> deals;
 
-    public Deals[] getDeals() {
+    public ArrayList<Deals> getDeals() {
         return deals;
     }
 
-    public void setDeals(Deals[] deals) {
+    public void setDeals(ArrayList<Deals> deals) {
         this.deals = deals;
     }
 

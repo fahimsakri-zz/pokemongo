@@ -153,7 +153,7 @@ public class PokemonListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             Bundle bundle = new Bundle();
             bundle.putString("name", pokemon.getTitle());
             bundle.putString("source", "Feed");
-            ((MainActivity) context).getAnalytics().logEvent("Viewed Pokemon", bundle);
+            ((MainActivity) context).getAnalytics().logEvent("viewed_pokemon", bundle);
         }
 
         @Override
