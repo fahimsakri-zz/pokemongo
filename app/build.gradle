@@ -20,6 +20,7 @@ android {
         versionName System.getenv("VERSION_NAME") as String ?: "1.0.0"
         resConfig "en"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     lintOptions {
         abortOnError false

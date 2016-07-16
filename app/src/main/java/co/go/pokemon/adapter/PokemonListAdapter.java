@@ -44,6 +44,12 @@ public class PokemonListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ItemHolder) {
+
+            if (position % 2 == 0) {
+                ((ItemHolder) holder).itemContainer.setBackgroundColor(context.getResources().getColor(R.color.smokeWhite));
+            } else {
+                ((ItemHolder) holder).itemContainer.setBackgroundColor(context.getResources().getColor(R.color.white));
+            }
             ((ItemHolder) holder).name.setText(pokemonList.get(position).getTitle());
             ((ItemHolder) holder).rank.setText(pokemonList.get(position).getRank());
         }
@@ -125,17 +131,18 @@ public class PokemonListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         }
 
-        private void pokemonViewed(Context context,Pokemon pokemon){
+        private void pokemonViewed(Context context, Pokemon pokemon) {
             Bundle bundle = new Bundle();
-            bundle.putString("name",pokemon.getTitle());
-            bundle.putString("source","Feed");
-            ((MainActivity)context).getAnalytics().logEvent("Viewed Pokemon",bundle);
+            bundle.putString("name", pokemon.getTitle());
+            bundle.putString("source", "Feed");
+            ((MainActivity) context).getAnalytics().logEvent("Viewed Pokemon", bundle);
         }
+
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.item_container) {
-                Pokemon pokemon =pokemonList.get(getAdapterPosition());
-                pokemonViewed(context,pokemon);
+                Pokemon pokemon = pokemonList.get(getAdapterPosition());
+                pokemonViewed(context, pokemon);
                 PokemonFragment pokemonFragment = PokemonFragment.newInstance(pokemonList.get(getAdapterPosition()));
                 FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
                 String backStateName = pokemonFragment.getClass().getName();
