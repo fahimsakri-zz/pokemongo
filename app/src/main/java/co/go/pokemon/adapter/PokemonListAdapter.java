@@ -7,11 +7,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,14 +47,27 @@ public class PokemonListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ItemHolder) {
-
             if (position % 2 == 0) {
                 ((ItemHolder) holder).itemContainer.setBackgroundColor(context.getResources().getColor(R.color.smokeWhite));
+                Glide.with(context)
+                        .load(pokemonList.get(position).getIcon_url())
+                        .fitCenter()
+                        .crossFade().placeholder(R.color.white)
+                        .into(((ItemHolder) holder).icon);
             } else {
                 ((ItemHolder) holder).itemContainer.setBackgroundColor(context.getResources().getColor(R.color.white));
+                Glide.with(context)
+                        .load(pokemonList.get(position).getIcon_url())
+                        .fitCenter()
+                        .crossFade().placeholder(R.color.smokeWhite)
+                        .into(((ItemHolder) holder).icon);
             }
             ((ItemHolder) holder).name.setText(pokemonList.get(position).getTitle());
-            ((ItemHolder) holder).rank.setText(pokemonList.get(position).getRank());
+            if (!TextUtils.isEmpty(pokemonList.get(position).getRank())) {
+                ((ItemHolder) holder).rank.setText("#" + pokemonList.get(position).getRank());
+            }
+
+
         }
     }
 

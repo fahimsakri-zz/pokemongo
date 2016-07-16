@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -14,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -38,7 +38,7 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
     private SearchView mSearcView;
     private List<Pokemon> pokemons;
     private PokemonListAdapter mAdaper;
-    private View offerBanner;
+    private LinearLayout offerBanner;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        offerBanner = (View) view.findViewById(R.id.offerBanner);
+        offerBanner = (LinearLayout) view.findViewById(R.id.offerBanner);
         offerBanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

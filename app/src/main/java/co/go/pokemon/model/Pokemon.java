@@ -10,6 +10,16 @@ import java.util.List;
 public class Pokemon implements Serializable {
     private String img_src;
 
+    public String getIcon_url() {
+        return icon_url;
+    }
+
+    public void setIcon_url(String icon_url) {
+        this.icon_url = icon_url;
+    }
+
+    private String icon_url;
+
     private String total;
 
     private String defense;

@@ -6,4 +6,5 @@
     <color name="appTextColor">#41434c</color>
     <color name="smokeWhite">#f4f4f4</color>
     <color name="white">#ffffff</color>
+    <color name="toolBarColor">#4D73A9</color>
 </resources>
