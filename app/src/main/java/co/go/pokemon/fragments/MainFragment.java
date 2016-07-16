@@ -56,7 +56,6 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
 
     private void offerListViewed(Context context) {
         Bundle bundle = new Bundle();
-        bundle.putString("type", "list");
         ((MainActivity) context).getAnalytics().logEvent("viewed_offer", bundle);
     }
 
