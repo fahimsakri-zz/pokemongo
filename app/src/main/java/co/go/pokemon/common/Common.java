@@ -4,13 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
+import co.go.pokemon.R;
 import co.go.pokemon.model.Offers;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -88,5 +91,18 @@ public class Common {
         if (v == null)
             return;
         inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
+
+
+    public static boolean isNetworkAvailable(final Context context) {
+        final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+    }
+
+    public static void noNetwork(final Context context) {
+        Toast.makeText(context, context.getString(R.string.error_no_internet), Toast.LENGTH_LONG).show();
+    }
+    public static void showDefaultError(final Context context) {
+        Toast.makeText(context, context.getString(R.string.error_default_error_text), Toast.LENGTH_LONG).show();
     }
 }

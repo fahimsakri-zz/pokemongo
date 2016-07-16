@@ -129,8 +129,13 @@ public class OfferListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         public void onClick(View view) {
-            offerListViewed(context);
-            Common.openDeepLink(context, Common.DEEPLINK_URL_BANNER);
+            if(Common.isNetworkAvailable(context)){
+                offerListViewed(context);
+                Common.openDeepLink(context, Common.DEEPLINK_URL_BANNER);
+            }else{
+                Common.noNetwork(context);
+            }
+
            /* if (view.getId() == R.id.item_container) {
                 Pokemon pokemon = pokemonList.get(getAdapterPosition());
                 pokemonViewed(context, pokemon);
