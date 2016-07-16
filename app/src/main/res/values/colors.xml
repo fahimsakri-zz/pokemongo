@@ -7,4 +7,12 @@
     <color name="smokeWhite">#f4f4f4</color>
     <color name="white">#ffffff</color>
     <color name="toolBarColor">#4D73A9</color>
+
+    <color name="flash_pay_background_regular">#F89B59</color>
+    <color name="flash_pay_background_regular_not_enabled">#80F89B59</color>
+    <color name="type_yellow_color">#EFD264</color>
+    <color name="type_blue_color">#4D73A9</color>
+
+    <color name="cards_shadow_color">#D4D5D6</color>
+
 </resources>

@@ -21,6 +21,7 @@ import java.util.List;
 
 import co.go.pokemon.MainActivity;
 import co.go.pokemon.R;
+import co.go.pokemon.common.Common;
 import co.go.pokemon.fragments.PokemonFragment;
 import co.go.pokemon.model.Pokemon;
 
@@ -52,14 +53,16 @@ public class PokemonListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 Glide.with(context)
                         .load(pokemonList.get(position).getIcon_url())
                         .fitCenter()
-                        .crossFade().placeholder(R.color.white)
+                        //.crossFade()
+                        .placeholder(R.color.white)
                         .into(((ItemHolder) holder).icon);
             } else {
                 ((ItemHolder) holder).itemContainer.setBackgroundColor(context.getResources().getColor(R.color.white));
                 Glide.with(context)
                         .load(pokemonList.get(position).getIcon_url())
                         .fitCenter()
-                        .crossFade().placeholder(R.color.smokeWhite)
+                        //.crossFade()
+                        .placeholder(R.color.smokeWhite)
                         .into(((ItemHolder) holder).icon);
             }
             ((ItemHolder) holder).name.setText(pokemonList.get(position).getTitle());
@@ -157,6 +160,7 @@ public class PokemonListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.item_container) {
+                Common.hideKeyboard(context);
                 Pokemon pokemon = pokemonList.get(getAdapterPosition());
                 pokemonViewed(context, pokemon);
                 PokemonFragment pokemonFragment = PokemonFragment.newInstance(pokemonList.get(getAdapterPosition()));
@@ -164,7 +168,7 @@ public class PokemonListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 String backStateName = pokemonFragment.getClass().getName();
                 FragmentTransaction fragmentTransaction =
                         fragmentManager.beginTransaction();
-                fragmentTransaction.add(android.R.id.content, pokemonFragment, backStateName);
+                fragmentTransaction.add(R.id.activity_main, pokemonFragment, backStateName);
                 fragmentTransaction.addToBackStack(backStateName);
                 fragmentTransaction.commit();
             }

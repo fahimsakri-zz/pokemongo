@@ -1,5 +1,6 @@
 package co.go.pokemon.common;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
@@ -7,7 +8,9 @@ import android.provider.Settings;
 import android.net.Uri;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import co.go.pokemon.model.Offers;
 import retrofit2.Call;
@@ -81,4 +84,14 @@ public class Common {
                 Settings.Secure.ANDROID_ID);
     }
 
+    public static void hideKeyboard(Context ctx) {
+        if (null == ctx)
+            return;
+        InputMethodManager inputManager = (InputMethodManager) ctx
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        View v = ((Activity) ctx).getCurrentFocus();
+        if (v == null)
+            return;
+        inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
 }

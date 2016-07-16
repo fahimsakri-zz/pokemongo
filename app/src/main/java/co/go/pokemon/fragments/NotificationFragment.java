@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import co.go.pokemon.R;
 import co.go.pokemon.adapter.OfferListAdapter;
 import co.go.pokemon.common.Common;
+import co.go.pokemon.itemdecoration.BrandCollectionDecoration;
 import co.go.pokemon.model.Offers;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +40,7 @@ public class NotificationFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerview = (RecyclerView) view.findViewById(R.id.mRecyclerView);
+        mRecyclerview.addItemDecoration(new BrandCollectionDecoration((int) getContext().getResources().getDimension(R.dimen.margin)));
         mRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://orbis.gofynd.com/")
