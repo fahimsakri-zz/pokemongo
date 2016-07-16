@@ -1,7 +1,11 @@
 package co.go.pokemon;
 
 import android.app.Application;
+
+import com.appsflyer.AppsFlyerLib;
 import com.crashlytics.android.Crashlytics;
+
+import co.go.pokemon.common.Common;
 import io.fabric.sdk.android.Fabric;
 
 /**
@@ -13,6 +17,8 @@ public class PokemonApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
-        // Fresco.initialize(this);
+        AppsFlyerLib.getInstance().setAndroidIdData(Common.getDeviceAndriod_Id(this));
+        AppsFlyerLib.getInstance().startTracking(this, Common.APPSFLYER_DEV_KEY);
+
     }
 }

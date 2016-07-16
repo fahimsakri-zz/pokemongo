@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
+        mavenCentral()
     }
 
     dependencies {
@@ -12,6 +13,7 @@ apply plugin: 'io.fabric'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
+    mavenCentral()
 }
 
 
@@ -19,10 +21,10 @@ android {
 
     signingConfigs {
         config {
-            keyAlias 'FyndKeystore'
-            keyPassword 'fyndretail2015!'
-            storeFile file(System.getenv("KEYSTORE") as String ?: '/Users/shopsense/Documents/Fahim/Projects/Android/Fynd/Keystore/Production/fynd.jks')
-            storePassword 'fyndretail2015!'
+            keyAlias 'pokemonkeystore'
+            keyPassword 'pokemon2016!'
+            storeFile file('/Users/shopsense/Documents/Fahim/Projects/Android/PokemonKeystore/pokemonkeystore.jks')
+            storePassword 'pokemon2016!'
         }
     }
     compileSdkVersion 24
@@ -46,12 +48,17 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+          // minifyEnabled true
             shrinkResources true
             signingConfig signingConfigs.config
             zipAlignEnabled true
-            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE-FIREBASE.txt'
+        exclude 'META-INF/NOTICE'
     }
 }
 
@@ -69,6 +76,7 @@ dependencies {
     compile 'com.google.firebase:firebase-core:9.2.1'
     compile 'com.google.firebase:firebase-crash:9.2.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.appsflyer:af-android-sdk:4+@aar'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile('com.crashlytics.sdk.android:crashlytics:2.6.0@aar') {

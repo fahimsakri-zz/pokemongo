@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
+import android.provider.Settings;
 import android.net.Uri;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -24,12 +25,10 @@ import retrofit2.http.GET;
 
 public class Common {
 
-    public static final String DEEPLINK_URL_BANNER ="http://go.fyndi.ng/iSyg/9HWwLNte3u";
-
-    public static final String DEEPLINK_URL_LIST ="http://go.fyndi.ng/iSyg/uj5uKbwe3u";
-
-    public static final String REFER_BANNER ="http://cdn3.gofynd.com/inapp_banners/fynd_credits_banner_small.jpg";
-
+    public static final String APPSFLYER_DEV_KEY = "zD9EQSqJtNMADxmqC3AiNQ";
+    public static final String DEEPLINK_URL_BANNER = "http://go.fyndi.ng/iSyg/9HWwLNte3u";
+    public static final String DEEPLINK_URL_LIST = "http://go.fyndi.ng/iSyg/uj5uKbwe3u";
+    public static final String REFER_BANNER = "http://cdn3.gofynd.com/inapp_banners/fynd_credits_banner_small.jpg";
     //Bottom Banner - http://go.fyndi.ng/iSyg/pLiBwWFe3u
 
     public interface OfferService {
@@ -82,6 +81,12 @@ public class Common {
             return deviceHeight;
         return getDeviceSize(DIME_TYPE_HEIGHT, context);
     }
+
+    public static String getDeviceAndriod_Id(Context context) {
+        return Settings.Secure.getString(context.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+    }
+
     public static void hideKeyboard(Context ctx) {
         if (null == ctx)
             return;
@@ -102,6 +107,7 @@ public class Common {
     public static void noNetwork(final Context context) {
         Toast.makeText(context, context.getString(R.string.error_no_internet), Toast.LENGTH_LONG).show();
     }
+
     public static void showDefaultError(final Context context) {
         Toast.makeText(context, context.getString(R.string.error_default_error_text), Toast.LENGTH_LONG).show();
     }

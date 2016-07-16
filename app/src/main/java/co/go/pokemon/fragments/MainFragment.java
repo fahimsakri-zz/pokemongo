@@ -29,6 +29,7 @@ import java.util.List;
 import co.go.pokemon.MainActivity;
 import co.go.pokemon.R;
 import co.go.pokemon.adapter.PokemonListAdapter;
+import co.go.pokemon.common.Common;
 import co.go.pokemon.model.Pokemon;
 
 /**
@@ -56,7 +57,6 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
 
     private void offerListViewed(Context context) {
         Bundle bundle = new Bundle();
-        bundle.putString("type", "list");
         ((MainActivity) context).getAnalytics().logEvent("viewed_offer", bundle);
     }
 
@@ -80,6 +80,16 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
             }
         });
         mSearcView = (SearchView) view.findViewById(R.id.txtSearch);
+        mSearcView.setIconifiedByDefault(false);
+        mSearcView.clearFocus();
+       // mSearcView.setImeOptions();
+       /* ((ViewGroup)mSearcView.getParent()).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSearcView.performClick();
+            }
+        });
+       */
         mSearcView.setOnQueryTextListener(this);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.pokemonlist);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -98,13 +108,15 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
             String content = loadJSONFromAsset();
             pokemons = gson.fromJson(content, POK_TYPE);
             // Adding Dummy Item for Refer n Earn Card
-          //  pokemons.add(0,null);
+            //  pokemons.add(0,null);
             mAdaper = new PokemonListAdapter(getContext(), pokemons);
             mRecyclerView.setAdapter(mAdaper);
             Log.d("lis", pokemons.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        Common.hideKeyboard(getActivity());
     }
 
     public String loadJSONFromAsset() {
