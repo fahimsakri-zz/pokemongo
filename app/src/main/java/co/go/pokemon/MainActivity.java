@@ -8,11 +8,14 @@ import android.support.v7.app.AppCompatDelegate;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import co.go.pokemon.common.Common;
 import co.go.pokemon.fragments.MainFragment;
+import co.go.pokemon.fragments.NotificationFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAnalytics mFireBaseAnalytics;
+
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
@@ -24,8 +27,15 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction =
                 fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.activity_main, new MainFragment());
-        fragmentTransaction.commit();
+        if (Common.isNetworkAvailable(getBaseContext())) {
+            fragmentTransaction.replace(R.id.activity_main, new MainFragment());
+            fragmentTransaction.commit();
+        } else {
+            fragmentTransaction.replace(R.id.activity_main, new NotificationFragment());
+            fragmentTransaction.commit();
+        }
+
+
     }
 
     public FirebaseAnalytics getAnalytics() {

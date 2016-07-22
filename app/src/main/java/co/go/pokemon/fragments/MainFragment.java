@@ -1,7 +1,6 @@
 package co.go.pokemon.fragments;
 
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,15 +13,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +27,17 @@ import co.go.pokemon.R;
 import co.go.pokemon.adapter.PokemonListAdapter;
 import co.go.pokemon.common.Common;
 import co.go.pokemon.model.Pokemon;
+import okhttp3.Cache;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static co.go.pokemon.common.Common.showDefaultError;
 
 /**
  * Created by fahim on 7/15/16.
@@ -42,6 +49,7 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
     private List<Pokemon> pokemons;
     private PokemonListAdapter mAdaper;
     private RelativeLayout offerBanner;
+    private ProgressBar progressBar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +73,10 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         offerBanner = (RelativeLayout) view.findViewById(R.id.offerBanner);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        if (progressBar != null && progressBar.getVisibility() != View.VISIBLE) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
         offerBanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,7 +94,7 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
         mSearcView = (SearchView) view.findViewById(R.id.txtSearch);
         mSearcView.setIconifiedByDefault(false);
         mSearcView.clearFocus();
-       // mSearcView.setImeOptions();
+        // mSearcView.setImeOptions();
        /* ((ViewGroup)mSearcView.getParent()).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,7 +105,7 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
         mSearcView.setOnQueryTextListener(this);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.pokemonlist);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        AssetFileDescriptor descriptor = null;
+        /*AssetFileDescriptor descriptor = null;
         try {
             descriptor = getContext().getAssets().openFd("pokemon.json");
         } catch (IOException e) {
@@ -114,10 +126,51 @@ public class MainFragment extends Fragment implements SearchView.OnQueryTextList
             Log.d("lis", pokemons.toString());
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
-        Common.hideKeyboard(getActivity());
+        OkHttpClient client = new OkHttpClient
+                .Builder()
+                .cache(new Cache(new File(getActivity().getApplication().getCacheDir(), "http"), 10 * 1024 * 1024))
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public okhttp3.Response intercept(Chain chain) throws IOException {
+                        Request request = chain.request();
+                        request = request.newBuilder().header("Cache-Control", "public, max-age=86400").build();
+                        return chain.proceed(request);
+                    }
+                })
+                .build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(client)
+                .baseUrl("http://orbis.gofynd.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Cache cache;
+        long SIZE_OF_CACHE = 10 * 1024 * 1024;
+        cache = new Cache(new File("", "http"), SIZE_OF_CACHE);
+        Common.PokemonService service = retrofit.create(Common.PokemonService.class);
+
+        Call<List<Pokemon>> repos = service.listPokemons();
+        repos.enqueue(new Callback<List<Pokemon>>() {
+            @Override
+            public void onResponse(Call<List<Pokemon>> call, Response<List<Pokemon>> response) {
+                if (progressBar != null && progressBar.getVisibility() == View.VISIBLE) {
+                    progressBar.setVisibility(View.GONE);
+                    ((View) progressBar.getParent()).setVisibility(View.GONE);
+                }
+                mAdaper = new PokemonListAdapter(getContext(), response.body());
+                mRecyclerView.setAdapter(mAdaper);
+            }
+
+            @Override
+            public void onFailure(Call<List<Pokemon>> call, Throwable t) {
+                showDefaultError(getActivity());
+                Log.e("","");
+            }
+        });
     }
+
 
     public String loadJSONFromAsset() {
         String json = null;

@@ -5,8 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
-import android.provider.Settings;
 import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
@@ -14,8 +15,11 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import java.util.List;
+
 import co.go.pokemon.R;
 import co.go.pokemon.model.Offers;
+import co.go.pokemon.model.Pokemon;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -34,6 +38,11 @@ public class Common {
     public interface OfferService {
         @GET("api/v2/web/inventory/get-sale/")
         Call<Offers> listOffers();
+    }
+
+    public interface PokemonService {
+        @GET("https://d2gwzh2hqto90s.cloudfront.net/metadata/metadata.json")
+        Call<List<Pokemon>> listPokemons();
     }
 
     public static int pxToDp(Context context, int px) {
@@ -55,7 +64,9 @@ public class Common {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         Point size = new Point();
-        display.getSize(size);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            display.getSize(size);
+        }
         deviceWidth = size.x;
         deviceHeight = size.y;
         if (type == DIME_TYPE_WIDTH) {
