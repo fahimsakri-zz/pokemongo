@@ -33,7 +33,7 @@ android {
         applicationId "co.go.pokemon"
         minSdkVersion 13
         targetSdkVersion 24
-        versionCode System.getenv("VERSION_CODE") as Integer ?: 1
+        versionCode System.getenv("VERSION_CODE") as Integer ?: 2
         versionName System.getenv("VERSION_NAME") as String ?: "1.0"
         resConfig "en"
         vectorDrawables.useSupportLibrary = true
@@ -41,17 +41,14 @@ android {
     lintOptions {
         abortOnError false
     }
-    aaptOptions {
-        noCompress "json"
-    }
 
     buildTypes {
         release {
-           minifyEnabled true
+            minifyEnabled true
             shrinkResources true
-            signingConfig signingConfigs.config
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     packagingOptions {
